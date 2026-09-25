@@ -1,0 +1,7 @@
+Maria Santos
+maria.santos@example.com · Ho Chi Minh City
+Product Designer, 4 years
+
+2022-2026 Brightpay — Product Designer: led redesign of merchant onboarding in Figma, lifting activation 22%; built design system of 60 components used by 4 squads; ran weekly usability tests and A/B experiments.
+2021-2022 Studio North — UI Designer: shipped marketing sites in Webflow; motion prototypes in After Effects; client presentations and handoff specs.
+Skills: Figma, design systems, prototyping, usability testing, A/B testing, Webflow, HTML/CSS, user research, agile.

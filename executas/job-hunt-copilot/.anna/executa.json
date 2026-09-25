@@ -1,0 +1,9 @@
+{
+  "$schema": "anna-executa-identity/v1",
+  "host": "https://anna.partners",
+  "executa_id": 1154,
+  "tool_id": "tool-memeshe-job-hunt-copilot-6gekb6ne",
+  "slug": "job-hunt-copilot",
+  "executa_type": "tool",
+  "first_published_at": "2026-09-25T15:18:46.495Z"
+}

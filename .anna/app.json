@@ -1,0 +1,8 @@
+{
+  "$schema": "anna-app-identity/v1",
+  "host": "https://anna.partners",
+  "app_id": 336,
+  "slug": "job-hunt-copilot",
+  "handle": "memeshe",
+  "first_published_at": "2026-09-25T15:17:50.893Z"
+}

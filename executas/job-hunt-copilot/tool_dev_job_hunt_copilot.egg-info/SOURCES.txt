@@ -1,0 +1,7 @@
+job_hunt_copilot_plugin.py
+pyproject.toml
+tool_dev_job_hunt_copilot.egg-info/PKG-INFO
+tool_dev_job_hunt_copilot.egg-info/SOURCES.txt
+tool_dev_job_hunt_copilot.egg-info/dependency_links.txt
+tool_dev_job_hunt_copilot.egg-info/entry_points.txt
+tool_dev_job_hunt_copilot.egg-info/top_level.txt

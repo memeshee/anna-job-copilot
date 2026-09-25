@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Job Hunt Copilot</title>
+<style>
+:root{color-scheme:light dark}
+*{box-sizing:border-box}
+body{font-family:system-ui,-apple-system,sans-serif;margin:0;padding:12px;max-width:640px}
+h1{font-size:18px;margin:4px 0 12px}
+.card{border:1px solid #8884;border-radius:10px;padding:10px;margin-bottom:10px}
+.card h2{font-size:14px;margin:0 0 8px}
+textarea,input[type=text]{width:100%;padding:8px;border-radius:8px;border:1px solid #8886;font:inherit}
+textarea{min-height:90px;resize:vertical}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+button{padding:9px 14px;border-radius:8px;border:0;background:#4f6df5;color:#fff;font-size:14px;min-height:44px;cursor:pointer}
+button.secondary{background:#6663}
+button:disabled{opacity:.5}
+pre#out{white-space:pre-wrap;background:#8881;border-radius:10px;padding:10px;min-height:120px;font-size:13px}
+.score{font-size:22px;font-weight:700}
+.small{font-size:12px;opacity:.75}
+.applist{font-size:13px}
+</style>
+<script src="./anna-tool-ids.js"></script>
+<script src="./app.js" type="module"></script>
+</head>
+<body>
+<h1>🎯 Job Hunt Copilot</h1>
+
+<div class="card">
+<h2>1 · Your profile (once)</h2>
+<textarea id="cv" placeholder="Paste CV text…"></textarea>
+<div class="row">
+<input type="file" id="cvfile" accept=".txt,.md,.pdf" style="flex:1" />
+</div>
+<div class="row">
+<input type="text" id="profileUrl" placeholder="LinkedIn / portfolio URL (optional)" style="flex:1" />
+<button id="btnProfile" class="secondary">Save profile</button>
+</div>
+<p class="small">PDF: text files read directly; scanned/image PDFs — paste the text instead. LinkedIn blocks bots, so URL is best-effort with paste fallback.</p>
+</div>
+
+<div class="card">
+<h2>2 · The job</h2>
+<div class="row">
+<input type="text" id="company" placeholder="Company" style="flex:1" />
+<input type="text" id="role" placeholder="Role" style="flex:1" />
+</div>
+<textarea id="jd" placeholder="Paste job description…" style="margin-top:8px"></textarea>
+<div class="row">
+<input type="text" id="jobUrl" placeholder="Job post URL (optional)" style="flex:1" />
+<button id="btnScore">Score fit</button>
+</div>
+<div class="row">
+<button id="btnTailor" class="secondary">Mirror bullets</button>
+<button id="btnCover" class="secondary">Cover letter</button>
+<button id="btnInterview" class="secondary">Interview pack</button>
+</div>
+</div>
+
+<div class="card">
+<h2>Result</h2>
+<pre id="out">Ready. Save your profile, paste a JD, hit Score fit.</pre>
+<div class="row">
+<button id="btnTrackAdd" class="secondary">+ Track this application</button>
+<button id="btnQuiet" class="secondary">Needs a nudge</button>
+</div>
+</div>
+
+<div class="card">
+<h2>3 · Pipeline</h2>
+<div id="apps" class="applist">Empty.</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,11 @@
+{
+  "$schema": "anna-executas-lock/v1",
+  "host": "https://anna.partners",
+  "executas": {
+    "job-copilot": {
+      "tool_id": "tool-memeshe-job-hunt-copilot-6gekb6ne",
+      "path": "./executas/job-hunt-copilot",
+      "source": "cut"
+    }
+  }
+}

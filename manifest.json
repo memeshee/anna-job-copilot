@@ -1,0 +1,37 @@
+{
+  "schema": 2,
+  "required_executas": [
+    {
+      "tool_id": "bundled:job-copilot"
+    }
+  ],
+  "tags": ["jobs", "resume", "productivity", "interview", "cover-letter"],
+  "ui": {
+    "bundle": {
+      "format": "static-spa",
+      "entry": "index.html",
+      "external_origins": []
+    },
+    "views": [
+      {
+        "name": "main",
+        "title": "Job Hunt Copilot",
+        "default": true,
+        "default_size": { "w": 560, "h": 760 },
+        "min_size": { "w": 360, "h": 520 }
+      }
+    ],
+    "host_api": {
+      "tools": ["bundled:job-copilot"],
+      "storage": ["get", "set"],
+      "window": ["set_title", "ready"]
+    },
+    "csp_overrides": {},
+    "state_merge": "last_writer_wins"
+  },
+  "dev": {
+    "fixtures": ["fixtures/*.jsonl"],
+    "seed_storage": {},
+    "user_id": 1
+  }
+}

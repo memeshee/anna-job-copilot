@@ -1,0 +1,11 @@
+{
+  "slug": "job-hunt-copilot",
+  "name": "Job Hunt Copilot",
+  "tagline": "Paste your CV once, score any job in 30 seconds — tailored bullets, cover letter, interview pack.",
+  "description": "Job Hunt Copilot turns 60 minutes of tailoring into 10. Save your CV (paste text, upload a file, or try a LinkedIn URL), paste any job description, and get a fit score with matched and missing keywords, paste-ready mirrored bullets, a forward-looking cover letter, and an interview prep pack mapped to your proof. Every application is tracked in a pipeline with 10-day follow-up nudges — drafts only, never auto-send. Honest by design: gaps get bridge lines marked [ADD IF TRUE], never invented experience.",
+  "homepage_url": "https://github.com/memeshee/anna-job-copilot",
+  "category": "productivity",
+  "bundled_executas": {
+    "job-copilot": { "path": "./executas/job-hunt-copilot" }
+  }
+}

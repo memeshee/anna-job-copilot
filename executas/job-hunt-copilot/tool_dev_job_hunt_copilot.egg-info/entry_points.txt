@@ -1,0 +1,2 @@
+[console_scripts]
+tool-dev-job-hunt-copilot = job_hunt_copilot_plugin:main

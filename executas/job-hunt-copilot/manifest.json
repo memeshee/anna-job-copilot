@@ -1,0 +1,98 @@
+{
+  "display_name": "Job Hunt Copilot",
+  "version": "0.1.1",
+  "description": "Turns a 60-minute tailor into 10 minutes: parses your CV, scores fit against a job post, mirrors bullets, drafts a cover letter, builds an interview pack, and tracks every application with follow-up nudges.",
+  "author": "kiter",
+  "homepage": "https://dorahacks.io/hackathon/2349/buidl",
+  "license": "MIT",
+  "tags": [
+    "jobs",
+    "resume",
+    "productivity",
+    "anna-app"
+  ],
+  "host_capabilities": [
+    "llm.sample"
+  ],
+  "tools": [
+    {
+      "name": "run",
+      "description": "Job-search pipeline. action: set_profile | score | tailor | cover | interview | track. set_profile parses a CV once; score/tailor/cover/interview need profile_text + job_text; track manages the application list.",
+      "parameters": [
+        {
+          "name": "action",
+          "type": "string",
+          "description": "One of: set_profile, score, tailor, cover, interview, track.",
+          "required": true
+        },
+        {
+          "name": "profile_text",
+          "type": "string",
+          "description": "CV作为纯文本 (or parsed profile summary). Required for score/tailor/cover/interview.",
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "job_text",
+          "type": "string",
+          "description": "Job description text. Alternatively pass job_url.",
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "job_url",
+          "type": "string",
+          "description": "Job posting or LinkedIn URL. Server-side fetch attempted; LinkedIn often blocks bots — paste text as fallback.",
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "company",
+          "type": "string",
+          "description": "Company name (cover letter + tracker).",
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "role",
+          "type": "string",
+          "description": "Role title (cover letter + tracker).",
+          "required": false,
+          "default": ""
+        },
+        {
+          "name": "apps_json",
+          "type": "string",
+          "description": "JSON array of tracked applications (for track action).",
+          "required": false,
+          "default": "[]"
+        },
+        {
+          "name": "op",
+          "type": "string",
+          "description": "track sub-op: add | update | list | quiet. Default list.",
+          "required": false,
+          "default": "list"
+        },
+        {
+          "name": "app_ref",
+          "type": "string",
+          "description": "JSON object of one application (for track add/update).",
+          "required": false,
+          "default": "{}"
+        },
+        {
+          "name": "note",
+          "type": "string",
+          "description": "Status note / outcome (for track update).",
+          "required": false,
+          "default": ""
+        }
+      ]
+    }
+  ],
+  "runtime": {
+    "type": "uv",
+    "min_version": "0.1.0"
+  }
+}
