@@ -3,6 +3,7 @@
   "name": "Job Hunt Copilot",
   "version": "0.1.1",
   "executa_type": "tool",
+  "tool_id": "tool-dev-job-hunt-copilot",
   "description": "CV parsing, JD fit scoring, bullet mirroring, cover letters, interview packs, application tracking.",
   "type": "python",
   "enabled": true

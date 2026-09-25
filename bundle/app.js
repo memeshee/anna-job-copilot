@@ -1,10 +1,11 @@
 import { AnnaAppRuntime } from "/static/anna-apps/_sdk/latest/index.js";
 
+const DEV_TOOL_ID = "tool-dev-job-hunt-copilot"; // local-dev fallback
 const TOOL_ID =
   (typeof window !== "undefined" &&
     window.__ANNA_TOOL_IDS__ &&
     window.__ANNA_TOOL_IDS__["job-copilot"]) ||
-  "tool-dev-job-hunt-copilot"; // local-dev fallback
+  DEV_TOOL_ID;
 const $ = (id) => document.getElementById(id);
 const out = (t) => { $("out").textContent = t; };
 
@@ -20,17 +21,36 @@ if (anna) {
   out("Standalone preview (no host). Open inside Anna to run.");
 }
 
-async function call(args) {
+async function invokeTool(toolId, args) {
   if (!anna) throw new Error("No host — open inside Anna.");
-  const res = await anna.tools.invoke({ tool_id: TOOL_ID, method: "run", args });
+  return anna.tools.invoke({ tool_id: toolId, method: "run", args });
+}
+
+function unwrap(res) {
   // Production Nexus unwraps the {success,data} envelope and returns data
-  // directly; standalone/scaffold paths may return the envelope as-is.
+  // directly; scaffold paths may return the envelope as-is.
   if (res && typeof res === "object" && "success" in res) {
     if (!res.success) throw new Error(res.error || "tool_failed");
     return res.data ?? {};
   }
   if (!res) throw new Error("tool_failed");
   return res;
+}
+
+async function call(args) {
+  const tried = new Set();
+  const candidates = [TOOL_ID, "bundled:job-copilot", DEV_TOOL_ID].filter(
+    (id) => id && !tried.has(id) && (tried.add(id), true));
+  let lastErr = null;
+  for (const id of candidates) {
+    try {
+      return unwrap(await invokeTool(id, args));
+    } catch (e) {
+      lastErr = e;
+      if (!/whitelist|permission_denied|not found|unknown tool|not available/i.test(e.message)) break;
+    }
+  }
+  throw lastErr;
 }
 
 function profile() { return $("cv").value.trim(); }
