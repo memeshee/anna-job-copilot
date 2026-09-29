@@ -478,6 +478,13 @@ def handle(req: dict[str, Any]) -> dict[str, Any]:
 
 
 def main() -> None:
+    # Windows consoles default to cp1252/cp936 — force UTF-8 so non-ASCII
+    # payloads (e.g. CJK in parameter descriptions) never break the transport.
+    try:
+        sys.stdout.reconfigure(encoding="utf-8", errors="replace")
+        sys.stdin.reconfigure(encoding="utf-8", errors="replace")
+    except Exception:  # noqa: BLE001
+        pass
     while True:
         if _queued:
             req = _queued.pop(0)
