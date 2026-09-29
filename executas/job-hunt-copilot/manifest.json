@@ -1,6 +1,6 @@
 {
   "display_name": "Job Hunt Copilot",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Turns a 60-minute tailor into 10 minutes: parses your CV, scores fit against a job post, mirrors bullets, drafts a cover letter, builds an interview pack, and tracks every application with follow-up nudges.",
   "author": "kiter",
   "homepage": "https://dorahacks.io/hackathon/2349/buidl",

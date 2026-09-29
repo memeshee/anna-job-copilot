@@ -23,7 +23,7 @@ import urllib.request
 import uuid
 from typing import Any
 
-VERSION = "0.1.1"
+VERSION = "0.1.2"
 
 MANIFEST: dict[str, Any] = {
     "display_name": "Job Hunt Copilot",

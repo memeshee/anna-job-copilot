@@ -1,0 +1,80 @@
+# ============================================================
+# Job Hunt Copilot — Executa multi-platform binary build
+# Builds the Python Executa with PyInstaller on 4 OS runners,
+# packages per-platform archives, uploads as workflow artifacts
+# and (on release) attaches them to the GitHub Release.
+# Artifacts land in executas/job-hunt-copilot/dist/ via download.
+# ============================================================
+
+name: Build Executa Binaries
+
+on:
+  workflow_dispatch:
+  release:
+    types: [created]
+
+env:
+  BIN_NAME: job-hunt-copilot
+  EXECUTA_DIR: executas/job-hunt-copilot
+  VERSION: 0.1.2
+
+jobs:
+  build:
+    strategy:
+      matrix:
+        include:
+          - os: macos-14
+            platform: darwin-arm64
+          - os: macos-13
+            platform: darwin-x86_64
+          - os: ubuntu-latest
+            platform: linux-x86_64
+          - os: windows-latest
+            platform: windows-x86_64
+            ext: .exe
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install PyInstaller
+        run: pip install pyinstaller
+
+      - name: Build
+        working-directory: ${{ env.EXECUTA_DIR }}
+        run: pyinstaller --onefile --name "${{ env.BIN_NAME }}" --clean --noupx job_hunt_copilot_plugin.py
+
+      - name: Smoke test (describe)
+        working-directory: ${{ env.EXECUTA_DIR }}
+        shell: bash
+        run: |
+          BIN="dist/${{ env.BIN_NAME }}${{ matrix.ext }}"
+          echo '{"jsonrpc":"2.0","method":"describe","id":1}' | "$BIN" 2>/dev/null | \
+            python3 -c "import sys,json; d=json.load(sys.stdin); assert d['result']['display_name']=='Job Hunt Copilot', d; print('protocol OK')"
+
+      - name: Package
+        working-directory: ${{ env.EXECUTA_DIR }}
+        shell: bash
+        run: |
+          cd dist
+          ARCHIVE="${{ env.BIN_NAME }}-${{ env.VERSION }}-${{ matrix.platform }}"
+          if [[ "${{ matrix.platform }}" == windows-* ]]; then
+            zip "$ARCHIVE.zip" "${{ env.BIN_NAME }}${{ matrix.ext }}"
+          else
+            tar czf "$ARCHIVE.tar.gz" "${{ env.BIN_NAME }}"
+          fi
+          sha256sum "$ARCHIVE".* > "$ARCHIVE.sha256"
+
+      - name: Upload to Release
+        if: github.event_name == 'release'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: ${{ env.EXECUTA_DIR }}/dist/${{ env.BIN_NAME }}-${{ env.VERSION }}-${{ matrix.platform }}.*
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.BIN_NAME }}-${{ matrix.platform }}
+          path: ${{ env.EXECUTA_DIR }}/dist/${{ env.BIN_NAME }}-${{ env.VERSION }}-${{ matrix.platform }}.*
