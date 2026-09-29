@@ -63,7 +63,7 @@ jobs:
           cd dist
           ARCHIVE="${{ env.BIN_NAME }}-${{ env.VERSION }}-${{ matrix.platform }}"
           if [[ "${{ matrix.platform }}" == windows-* ]]; then
-            zip "$ARCHIVE.zip" "${{ env.BIN_NAME }}${{ matrix.ext }}"
+            python3 -c "import zipfile; zipfile.ZipFile('$ARCHIVE.zip','w',zipfile.ZIP_DEFLATED).write('${{ env.BIN_NAME }}${{ matrix.ext }}')"
           else
             tar czf "$ARCHIVE.tar.gz" "${{ env.BIN_NAME }}"
           fi
