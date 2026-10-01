@@ -3,8 +3,24 @@
   "name": "Job Hunt Copilot",
   "version": "0.1.2",
   "executa_type": "tool",
-  "tool_id": "tool-dev-job-hunt-copilot",
+  "tool_id": "tool-memeshe-job-hunt-copilot-6gekb6ne",
   "description": "CV parsing, JD fit scoring, bullet mirroring, cover letters, interview packs, application tracking.",
-  "type": "python",
-  "enabled": true
+  "type": "binary",
+  "entrypoint": "job-hunt-copilot",
+  "enabled": true,
+  "binary_urls": {
+    "darwin-arm64": {
+      "url": "https://github.com/memeshee/anna-job-copilot/releases/download/v0.1.2/job-hunt-copilot-0.1.2-darwin-arm64.tar.gz",
+      "sha256": "3803ac9d732ab082a01f263aa4d90b1b016b4b5bfb643a9c2870bf871ee0ede4"
+    },
+    "linux-x86_64": {
+      "url": "https://github.com/memeshee/anna-job-copilot/releases/download/v0.1.2/job-hunt-copilot-0.1.2-linux-x86_64.tar.gz",
+      "sha256": "408e81277e7f139f1b6e2587eb9dae75a1fa916ff77d370a981b611b68231600"
+    },
+    "windows-x86_64": {
+      "url": "https://github.com/memeshee/anna-job-copilot/releases/download/v0.1.2/job-hunt-copilot-0.1.2-windows-x86_64.zip",
+      "sha256": "ca1b8e29cc30b3166ce2b49e8976b22d1f9892a8a8b8e72967b93262377bb36c",
+      "format": "zip"
+    }
+  }
 }
