@@ -22,7 +22,7 @@
       }
     ],
     "host_api": {
-      "tools": ["bundled:job-copilot", "tool-dev-job-hunt-copilot"],
+      "tools": ["bundled:job-copilot"],
       "storage": ["get", "set"],
       "window": ["set_title", "ready"]
     },
