@@ -4,7 +4,7 @@
   "version": "0.1.2",
   "executa_type": "tool",
   "tool_id": "tool-memeshe-job-hunt-copilot-6gekb6ne",
-  "description": "CV parsing, JD fit scoring, bullet mirroring, cover letters, interview packs, application tracking.",
+  "description": "CV parsing, JD fit scoring, bullet mirroring, cover letters, interview packs, application tracking with follow-up nudges.",
   "type": "binary",
   "entrypoint": "job-hunt-copilot",
   "enabled": true,
