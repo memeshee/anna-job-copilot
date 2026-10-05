@@ -2,7 +2,8 @@
   "schema": 2,
   "required_executas": [
     {
-      "tool_id": "bundled:job-copilot"
+      "tool_id": "bundled:job-copilot",
+      "min_version": "0.1.2"
     }
   ],
   "tags": ["jobs", "resume", "productivity", "interview", "cover-letter"],

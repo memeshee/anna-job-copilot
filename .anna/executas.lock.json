@@ -5,7 +5,7 @@
     "job-copilot": {
       "tool_id": "tool-memeshe-job-hunt-copilot-6gekb6ne",
       "path": "./executas/job-hunt-copilot",
-      "source": "cut"
+      "source": "working"
     }
   }
 }
