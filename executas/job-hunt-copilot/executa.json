@@ -1,10 +1,10 @@
 {
   "slug": "job-hunt-copilot",
   "name": "Job Hunt Copilot",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "executa_type": "tool",
   "tool_id": "tool-memeshe-job-hunt-copilot-6gekb6ne",
-  "description": "CV parsing, JD fit scoring, bullet mirroring, cover letters, interview packs, application tracking with follow-up nudges.",
+  "description": "CV parsing (paste or PDF), JD fit scoring, grounded bullet mirroring, cover letters, interview packs, application tracking with follow-up nudges.",
   "type": "binary",
   "entrypoint": "job-hunt-copilot",
   "enabled": true,
@@ -12,16 +12,16 @@
     "type": "binary",
     "binary_urls": {
       "darwin-arm64": {
-        "url": "https://github.com/memeshee/anna-job-copilot/releases/download/v0.1.2/job-hunt-copilot-0.1.2-darwin-arm64.tar.gz",
-        "sha256": "3803ac9d732ab082a01f263aa4d90b1b016b4b5bfb643a9c2870bf871ee0ede4"
+        "url": "https://github.com/memeshee/anna-job-copilot/releases/download/v0.1.5/job-hunt-copilot-0.1.5-darwin-arm64.tar.gz",
+        "sha256": "d9834d57bc9aaa68af040e78fed8d477f13854b39c090b0c73006d3f06f1d7b0"
       },
       "linux-x86_64": {
-        "url": "https://github.com/memeshee/anna-job-copilot/releases/download/v0.1.2/job-hunt-copilot-0.1.2-linux-x86_64.tar.gz",
-        "sha256": "408e81277e7f139f1b6e2587eb9dae75a1fa916ff77d370a981b611b68231600"
+        "url": "https://github.com/memeshee/anna-job-copilot/releases/download/v0.1.5/job-hunt-copilot-0.1.5-linux-x86_64.tar.gz",
+        "sha256": "dddb6a9eb12ffdac8c208746f65203a1280666e2613c0e4db64586bc4c626671"
       },
       "windows-x86_64": {
-        "url": "https://github.com/memeshee/anna-job-copilot/releases/download/v0.1.2/job-hunt-copilot-0.1.2-windows-x86_64.zip",
-        "sha256": "ca1b8e29cc30b3166ce2b49e8976b22d1f9892a8a8b8e72967b93262377bb36c",
+        "url": "https://github.com/memeshee/anna-job-copilot/releases/download/v0.1.5/job-hunt-copilot-0.1.5-windows-x86_64.zip",
+        "sha256": "28b18f4f7d196a026f7639fe988f7873605e8d42698e8944a71fd41eaaf3f193",
         "format": "zip"
       }
     }
