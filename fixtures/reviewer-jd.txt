@@ -1,0 +1,5 @@
+Senior AI Product Manager - Nexus Labs
+
+Requirements: 4+ years PM experience; LLM / prompt engineering; RAG and vector DB concepts;
+SQL and analytics; GTM launch experience; developer platform or API product experience;
+Kubernetes is a plus.

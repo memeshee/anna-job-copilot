@@ -5,3 +5,5 @@ __pycache__/
 uv.lock
 bundle/anna-tool-ids.js
 fixtures/*.jsonl
+.anna/dev-*.json
+executas/*/.anna/dev-*.json

@@ -1,0 +1,12 @@
+Alex Chen | Product Manager
+
+SUMMARY: 5 years in B2B SaaS, launched AI features to 20K MAU.
+SKILLS: Roadmap, SQL, A/B Testing, Mixpanel, User Research
+
+EXPERIENCE:
+FlowStack (2021-Present) Product Manager
+- Led launch of AI assistant, grew to 18,500 MAU in 90 days
+- Cut onboarding drop-off by 22% via A/B tests
+- Managed roadmap for 3 squads, 12 engineers
+
+EDUCATION: BSc Computer Science

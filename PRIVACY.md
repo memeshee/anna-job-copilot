@@ -1,35 +1,45 @@
 # Privacy Policy — Job Hunt Copilot
 
-Effective: 2026-10-05. Contact: https://github.com/memeshee/anna-job-copilot/issues
+Effective: 2026-10-09. Contact: https://github.com/memeshee/anna-job-copilot/issues
 
 Job Hunt Copilot runs **inside your Anna agent** (local or your own cloud
 agent). The developer operates **no server, no account system, no analytics,
-no tracking**.
+no tracking**. Nothing you enter is sent to the developer or any third party.
 
 ## What stays with you
 
-- Your CV/profile text and uploaded files, job descriptions you paste, fit
+- Your CV/profile text, uploaded CV files, job descriptions you paste, fit
   scores, generated bullets / cover letters / interview packs, and your
   application pipeline are stored in **Anna's on-agent storage** (the app's
-  sandboxed `storage` API). They never leave your agent except as described
-  below. Uninstalling/removing the app's data deletes them.
+  sandboxed `storage` API) and nowhere else. Uninstalling the app or clearing
+  its data deletes them.
+- CV files you upload (.pdf/.txt/.md) are read **locally**: a PDF is parsed in
+  the app's own sandbox (bundled pdf.js), and if that fails it is handed to the
+  bundled Executa tool running on your agent (pypdf). The bytes never leave
+  your machine/agent.
 
-## Network requests the app makes (only when you ask)
+## What the app calls on your machine or agent
 
-- **Job-post URL:** if you paste a job-post link and hit Score, the app
-  fetches that page (with a normal browser user-agent) to extract the job
-  description text. That request goes to the site you chose, carrying no
+- **Your agent's LLM (Anna sampling).** When your agent exposes the LLM
+  sampling capability, the bundled tool asks *your own agent* for the wording
+  of the fit verdict, mirrored bullets, cover letter and interview pack. This
+  is Anna's own model call under your account's policy — the app ships no API
+  key, calls no developer endpoint, and stores no prompt history of its own.
+  If sampling is unavailable, the app falls back to fully local, deterministic
+  text generation and says so.
+- **One optional outbound fetch, to a URL you supply.** If you paste a
+  job-post URL, the tool fetches that exact page to extract the job
+  description text. That request goes to the site you chose and carries no
   personal data beyond a standard page view.
-- **LinkedIn / portfolio URL:** same deal — best-effort fetch of a page you
-  supplied, to prefill your profile. LinkedIn usually blocks bots, so paste
-  fallback is offered.
-- No other network calls. No ads, no trackers, no third-party SDKs.
+- **LinkedIn URLs are never fetched.** LinkedIn answers automated requests with
+  a login wall, so the app tells you to export your profile as a PDF (or paste
+  the text) instead of pretending it can read the page.
 
 ## What we never do
 
 - No sale, rental, or sharing of your data with anyone.
-- No training of models on your data (all matching/scoring is local,
-  deterministic code — no external AI API is called, ever).
+- No third-party analytics, ads, trackers or SDKs.
+- No training of any model on your data by the developer.
 - No cross-app data access beyond Anna's own permission model.
 
 ## Changes

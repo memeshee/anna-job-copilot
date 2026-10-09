@@ -5,72 +5,168 @@
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Job Hunt Copilot</title>
 <style>
-:root{color-scheme:light dark}
+:root{
+  color-scheme: light dark;
+  --bg:#ffffff; --fg:#111827; --muted:#6b7280; --line:#d7dbe4; --soft:#f4f6fa;
+  --primary:#2f5bea; --primary-ink:#ffffff; --primary-hover:#2549c4;
+  --secondary-bg:#ffffff; --secondary-ink:#1f2937; --secondary-line:#9aa3b5;
+  --disabled-bg:#e9ecf2; --disabled-ink:#98a0b3; --disabled-line:#d7dbe4;
+  --ok:#0f7b4f; --warn:#b45309; --err:#b42318; --chip:#eef2ff;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#14181f; --fg:#e8ebf2; --muted:#9aa3b5; --line:#2b3240; --soft:#1b212b;
+    --primary:#5b7cff; --primary-ink:#0b1020; --primary-hover:#7c95ff;
+    --secondary-bg:#1b212b; --secondary-ink:#e8ebf2; --secondary-line:#4a5468;
+    --disabled-bg:#212734; --disabled-ink:#697083; --disabled-line:#2b3240;
+    --ok:#5fce9b; --warn:#f0b357; --err:#ff8f85; --chip:#232c44;
+  }
+}
 *{box-sizing:border-box}
-body{font-family:system-ui,-apple-system,sans-serif;margin:0;padding:12px;max-width:640px}
-h1{font-size:18px;margin:4px 0 12px}
-.card{border:1px solid #8884;border-radius:10px;padding:10px;margin-bottom:10px}
-.card h2{font-size:14px;margin:0 0 8px}
-textarea,input[type=text]{width:100%;padding:8px;border-radius:8px;border:1px solid #8886;font:inherit}
-textarea{min-height:90px;resize:vertical}
+body{margin:0;padding:14px;background:var(--bg);color:var(--fg);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;font-size:14px;line-height:1.45;
+  max-width:680px}
+h1{font-size:18px;margin:0 0 2px}
+.sub{margin:0 0 12px;color:var(--muted);font-size:12.5px}
+.steps{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.step{font-size:12px;padding:4px 9px;border-radius:999px;border:1px solid var(--line);
+  color:var(--muted);background:var(--soft)}
+.step.on{border-color:var(--primary);color:var(--primary);font-weight:600}
+.step.done{border-color:var(--ok);color:var(--ok)}
+.card{border:1px solid var(--line);border-radius:12px;padding:12px;margin-bottom:12px;
+  background:var(--bg)}
+.cardhead{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.card h2{font-size:13.5px;margin:0;letter-spacing:.01em}
+label.fl{display:block;font-size:12px;color:var(--muted);margin:8px 0 4px}
+textarea,input[type=text]{width:100%;padding:9px 10px;border-radius:9px;border:1px solid var(--line);
+  background:var(--soft);color:var(--fg);font:inherit}
+textarea{min-height:96px;resize:vertical}
+textarea:focus,input[type=text]:focus{outline:2px solid var(--primary);outline-offset:1px;
+  background:var(--bg)}
 .row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
-button{padding:9px 14px;border-radius:8px;border:0;background:#4f6df5;color:#fff;font-size:14px;min-height:44px;cursor:pointer}
-button.secondary{background:#6663}
-button:disabled{opacity:.5}
-pre#out{white-space:pre-wrap;background:#8881;border-radius:10px;padding:10px;min-height:120px;font-size:13px}
-.score{font-size:22px;font-weight:700}
-.small{font-size:12px;opacity:.75}
-.applist{font-size:13px}
+.row>*{flex:1 1 150px;min-width:0}
+.row.tight>*{flex:0 0 auto}
+
+button{font:inherit}
+.btn{padding:10px 14px;border-radius:9px;border:1px solid transparent;min-height:44px;
+  cursor:pointer;font-weight:600;font-size:13.5px}
+.btn.primary{background:var(--primary);color:var(--primary-ink)}
+.btn.primary:hover:not(:disabled){background:var(--primary-hover)}
+.btn.secondary{background:var(--secondary-bg);color:var(--secondary-ink);
+  border-color:var(--secondary-line)}
+.btn.secondary:hover:not(:disabled){border-color:var(--primary);color:var(--primary)}
+.btn.ghost{background:transparent;color:var(--muted);border-color:var(--line);
+  min-height:32px;padding:5px 10px;font-size:12px;font-weight:500}
+.btn.ghost:hover:not(:disabled){color:var(--primary);border-color:var(--primary)}
+.btn:disabled{background:var(--disabled-bg);color:var(--disabled-ink);
+  border-color:var(--disabled-line);cursor:not-allowed;font-weight:500}
+.btn:disabled::after{content:""}
+.hint{font-size:11.5px;color:var(--muted);margin:6px 0 0}
+.hint.warn{color:var(--warn)}
+.drop{display:flex;align-items:center;justify-content:center;gap:8px;text-align:center;
+  border:1.5px dashed var(--line);border-radius:9px;padding:11px;margin-top:8px;cursor:pointer;
+  background:var(--soft);font-size:13px;font-weight:600;color:var(--fg)}
+.drop:hover,.drop.hover{border-color:var(--primary);color:var(--primary)}
+.drop small{font-weight:400;color:var(--muted)}
+.note{font-size:11.5px;margin:6px 0 0;color:var(--muted)}
+.note.ok{color:var(--ok)} .note.err{color:var(--err)} .note.warn{color:var(--warn)}
+.out{white-space:pre-wrap;word-break:break-word;background:var(--soft);border-radius:10px;
+  padding:11px;min-height:110px;font-size:12.8px;font-family:ui-monospace,SFMono-Regular,Menlo,monospace;
+  margin:0}
+.scoreline{display:flex;align-items:baseline;gap:8px;margin-bottom:6px}
+.score{font-size:26px;font-weight:800;line-height:1}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0 0}
+.chip{font-size:11px;padding:3px 7px;border-radius:999px;background:var(--chip);color:var(--fg)}
+.chip.miss{background:transparent;border:1px dashed var(--line);color:var(--muted)}
+.applist{font-size:12.8px}
+.approw{display:flex;align-items:center;gap:8px;padding:7px 0;border-bottom:1px solid var(--line)}
+.approw:last-child{border-bottom:0}
+.approw .who{flex:1;min-width:0}
+.approw .who b{font-weight:600}
+.tag{font-size:10.5px;padding:2px 6px;border-radius:6px;background:var(--chip);color:var(--muted);
+  white-space:nowrap}
+.mini{font-size:11px;color:var(--muted);background:transparent;border:1px solid var(--line);
+  border-radius:7px;padding:3px 8px;cursor:pointer;min-height:28px}
+.mini:hover{color:var(--err);border-color:var(--err)}
+.banner{display:none;border-radius:9px;padding:9px 11px;font-size:12.5px;margin-bottom:10px;
+  border:1px solid var(--line);background:var(--soft)}
+.banner.show{display:block}
+.banner.err{border-color:var(--err);color:var(--err)}
+.banner.ok{border-color:var(--ok);color:var(--ok)}
+.foot{font-size:11px;color:var(--muted);text-align:center;padding:2px 0 6px}
 </style>
 <script src="./anna-tool-ids.js"></script>
 <script src="./app.js" type="module"></script>
 </head>
 <body>
 <h1>🎯 Job Hunt Copilot</h1>
+<p class="sub">Paste your CV once · score any job · paste-ready bullets, cover letter, interview pack.</p>
 
-<div class="card">
-<h2>1 · Your profile (once)</h2>
-<textarea id="cv" placeholder="Paste CV text…"></textarea>
-<div class="row">
-<input type="file" id="cvfile" accept=".txt,.md,.pdf" style="flex:1" />
-</div>
-<div class="row">
-<input type="text" id="profileUrl" placeholder="LinkedIn / portfolio URL (optional)" style="flex:1" />
-<button id="btnProfile" class="secondary">Save profile</button>
-</div>
-<p class="small">PDF: text files read directly; scanned/image PDFs — paste the text instead. LinkedIn blocks bots, so URL is best-effort with paste fallback.</p>
+<div class="steps">
+  <span class="step" id="step1">1 · Profile</span>
+  <span class="step" id="step2">2 · Job</span>
+  <span class="step" id="step3">3 · Tailor &amp; track</span>
 </div>
 
+<div class="banner" id="banner" role="status"></div>
+
 <div class="card">
-<h2>2 · The job</h2>
-<div class="row">
-<input type="text" id="company" placeholder="Company" style="flex:1" />
-<input type="text" id="role" placeholder="Role" style="flex:1" />
-</div>
-<textarea id="jd" placeholder="Paste job description…" style="margin-top:8px"></textarea>
-<div class="row">
-<input type="text" id="jobUrl" placeholder="Job post URL (optional)" style="flex:1" />
-<button id="btnScore">Score fit</button>
-</div>
-<div class="row">
-<button id="btnTailor" class="secondary">Mirror bullets</button>
-<button id="btnCover" class="secondary">Cover letter</button>
-<button id="btnInterview" class="secondary">Interview pack</button>
-</div>
+  <div class="cardhead"><h2>1 · Your profile (once)</h2></div>
+  <label class="fl" for="cv">CV / résumé text</label>
+  <textarea id="cv" placeholder="Paste your CV text here…"></textarea>
+
+  <label class="drop" id="drop" for="cvfile">📄 Choose a CV file
+    <small>PDF, TXT or MD — or drop it here</small></label>
+  <input type="file" id="cvfile" accept=".pdf,.txt,.md,.text,application/pdf,text/plain" hidden />
+  <p class="note" id="fileMsg">Scanned PDFs (images) can’t be read — paste the text instead.</p>
+
+  <div class="row">
+    <input type="text" id="profileUrl" placeholder="LinkedIn or portfolio URL (optional)" />
+    <button id="btnProfile" class="btn primary">Save profile</button>
+  </div>
+  <p class="hint" id="hintProfile">Paste your CV, pick a file, or enter a profile URL.</p>
 </div>
 
 <div class="card">
-<h2>Result</h2>
-<pre id="out">Ready. Save your profile, paste a JD, hit Score fit.</pre>
-<div class="row">
-<button id="btnTrackAdd" class="secondary">+ Track this application</button>
-<button id="btnQuiet" class="secondary">Needs a nudge</button>
-</div>
+  <div class="cardhead"><h2>2 · The job</h2></div>
+  <div class="row">
+    <input type="text" id="company" placeholder="Company" />
+    <input type="text" id="role" placeholder="Role" />
+  </div>
+  <label class="fl" for="jd">Job description text</label>
+  <textarea id="jd" placeholder="Paste the job description…"></textarea>
+  <div class="row">
+    <input type="text" id="jobUrl" placeholder="Job post URL (optional — LinkedIn blocks bots)" />
+  </div>
+  <div class="row tight">
+    <button id="btnScore" class="btn primary">Score fit</button>
+  </div>
+  <p class="hint" id="hintScore">Save your profile (step 1) and paste the job description.</p>
+
+  <div class="row tight" style="margin-top:10px">
+    <button id="btnTailor" class="btn secondary">Mirror bullets</button>
+    <button id="btnCover" class="btn secondary">Cover letter</button>
+    <button id="btnInterview" class="btn secondary">Interview pack</button>
+  </div>
+  <p class="hint" id="hintTools">Save your profile and score a job first.</p>
 </div>
 
 <div class="card">
-<h2>3 · Pipeline</h2>
-<div id="apps" class="applist">Empty.</div>
+  <div class="cardhead"><h2 id="resultTitle">Result</h2>
+    <button id="btnCopy" class="btn ghost">Copy</button></div>
+  <pre id="out">Ready. Save your profile, then paste a job description and press “Score fit”.</pre>
 </div>
+
+<div class="card">
+  <div class="cardhead"><h2>3 · Pipeline</h2></div>
+  <div class="row tight">
+    <button id="btnTrackAdd" class="btn primary">+ Track this application</button>
+    <button id="btnQuiet" class="btn secondary">Needs a nudge</button>
+  </div>
+  <p class="hint" id="hintTrack">Fill in company and role (step 2) to track an application.</p>
+  <div id="apps" class="applist" style="margin-top:8px">Empty — score a job, then track it.</div>
+</div>
+
+<p class="foot">Everything stays on your Anna agent. Scripts, bullets and letters are drafts — nothing is ever sent for you.</p>
 </body>
 </html>

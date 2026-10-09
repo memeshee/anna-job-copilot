@@ -16,7 +16,7 @@ on:
 env:
   BIN_NAME: job-hunt-copilot
   EXECUTA_DIR: executas/job-hunt-copilot
-  VERSION: 0.1.2
+  VERSION: 0.1.5
 
 jobs:
   build:
@@ -43,7 +43,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install PyInstaller
-        run: pip install pyinstaller
+        run: pip install pyinstaller pypdf
 
       - name: Build
         working-directory: ${{ env.EXECUTA_DIR }}
